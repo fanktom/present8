@@ -61,16 +61,16 @@ func surroundWithHTML(html []byte) []byte {
 		</style>
 		<script>
 var p8 = {};
-function p8.allSlides() {
+p8.allSlides = function() {
   return document.querySelectorAll("section.slide");
 }
 
-function p8.currentSlide() {
+p8.currentSlide = function() {
   var slides = p8.allSlides();
   return slides[p8.currentSlideIndex()];
 }
 
-function p8.currentSlideIndex() {
+p8.currentSlideIndex = function() {
   var slides = p8.allSlides();
   for(var i = slides.length-1; i >= 0; i--) {
     if((window.pageYOffset +1) >= slides[i].offsetTop){
@@ -80,7 +80,7 @@ function p8.currentSlideIndex() {
   return 0;
 }
 
-function p8.p8.nextSlideIndex() {
+p8.nextSlideIndex = function() {
   var slides = p8.allSlides();
   var current = p8.currentSlideIndex();
   var next = current + 1;
@@ -90,7 +90,7 @@ function p8.p8.nextSlideIndex() {
   return next;
 }
 
-function p8.p8.previousSlideIndex() {
+p8.previousSlideIndex = function() {
   var slides = p8.allSlides();
   var current = p8.currentSlideIndex();
   var prev = current - 1;
@@ -100,21 +100,21 @@ function p8.p8.previousSlideIndex() {
   return prev;
 }
 
-function p8.scrollToSlide(index) {
+p8.scrollToSlide = function(index) {
   var slides = p8.allSlides();
   var slide = slides[index];
   window.scrollTo(0, slide.offsetTop);
 }
 
-function p8.nextSlide() {
-  p8.scrollToSlide(p8.p8.nextSlideIndex());
+p8.nextSlide = function() {
+  p8.scrollToSlide(p8.nextSlideIndex());
 }
 
-function p8.previousSlide() {
-  p8.scrollToSlide(p8.p8.previousSlideIndex());
+p8.previousSlide = function() {
+  p8.scrollToSlide(p8.previousSlideIndex());
 }
 
-function p8.registerKeyNavigation() {
+p8.registerKeyNavigation = function() {
   document.onkeydown = function(e){
     e.preventDefault();
     // right, down and space
