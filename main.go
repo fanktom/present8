@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/russross/blackfriday"
@@ -34,6 +35,7 @@ func main() {
 
 	// Processing Pipeline
 	output = compileSlides(output)
+	output = sizeImages(output)
 	output = surroundWithHTML(output)
 
 	// Write HTML
@@ -50,13 +52,45 @@ func surroundWithHTML(html []byte) []byte {
     <title>%v</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<style>
-			body, h1, h2, h3, h4, h5, p, ul, li {
+			/* minimal style */
+			body, h1, h2, h3, h4, h5, p {
 				margin: 0;
 				padding: 0;
 			}
 
 			section.slide {
 				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+
+			section.slide > div.padding {
+				margin: 2em;
+			}
+			
+			/* base style */
+			body {
+				font-family: sans-serif;
+				font-size: 1.5em;
+				line-height: 1.5;
+			}
+
+			h1, h2, h3, table {
+				margin-bottom: 1em;
+			}
+			
+			h4, h5, p {
+				margin-bottom: 0.5em;
+			}
+
+			table {
+				width: 100%%;
+			}
+
+			p img.center {
+				display: block;
+				margin: 0 auto;
 			}
 		</style>
 		<script>
@@ -132,9 +166,11 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
   </head>
   <body>
 		<section class='slide'>
+			<div class='padding'>
 	`, title)
 	out += string(html)
-	out += `</section>
+	out += `</div>
+		</section>
 	</body>
 </html>`
 	return []byte(out)
@@ -142,6 +178,44 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 
 func compileSlides(html []byte) []byte {
 	out := string(html)
-	out = strings.Replace(out, "<hr />", "</section>\n<section class='slide'>", -1)
+	out = strings.Replace(out, "<hr />", "</div>\n</section>\n<section class='slide'>\n<div class='padding'>", -1)
+	return []byte(out)
+}
+
+var imgRegex = regexp.MustCompile("<img.+/>")
+var imgAltRegex = regexp.MustCompile("alt=\"(.+)\"")
+var isDigitRegex = regexp.MustCompile("\\d")
+
+func sizeImages(html []byte) []byte {
+	out := string(html)
+	// Find all image tags
+	images := imgRegex.FindAll(html, -1)
+	for _, image := range images {
+		img := string(image)
+
+		// Find all alt tags
+		alts := imgAltRegex.FindSubmatch(image)
+		if len(alts) < 2 {
+			continue
+		}
+		alt := alts[1]
+
+		// Tokens are space separated in alt tags
+		tokens := strings.Split(string(alt), " ")
+		style := ""
+		class := ""
+		for _, token := range tokens {
+			// If token contains a number it is assumed to be a width
+			if isDigitRegex.MatchString(token) {
+				style += "width: " + token + ";"
+				continue
+			}
+			// Else it is appended as class to the image, e.g. center
+			class += token + " "
+		}
+		// Replace old image tag with patched one
+		newImg := fmt.Sprintf("%v style=\"%v\" class=\"%v\">", img[0:len(img)-3], style, class)
+		out = strings.Replace(out, img, newImg, 1)
+	}
 	return []byte(out)
 }
