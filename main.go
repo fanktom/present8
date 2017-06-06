@@ -92,6 +92,29 @@ func surroundWithHTML(html []byte) []byte {
 				display: block;
 				margin: 0 auto;
 			}
+
+			code {
+				padding: 0.4em;
+				padding-top: 0.2em;
+				padding-bottom: 0.2em;
+				margin: 0;
+				font-size: 85%%;
+				background-color: rgba(27,31,35,0.05);
+				border-radius: 3px;	
+			}
+
+			pre {
+				padding: 16px;
+				overflow: auto;
+				font-size: 85%%;
+				line-height: 1.45;
+				background-color: #f6f8fa;
+				border-radius: 3px;
+			}
+
+			pre > code {
+				background: none;
+			}
 		</style>
 		<script>
 var p8 = {};
