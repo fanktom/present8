@@ -37,6 +37,7 @@ func main() {
 	output = compileSlides(output)
 	output = sizeImages(output)
 	output = surroundWithHTML(output)
+	output = numberSlides(output)
 
 	// Write HTML
 	err = ioutil.WriteFile(input+".html", output, 0644)
@@ -45,6 +46,7 @@ func main() {
 	}
 }
 
+// Wraps all slides into the HTML base structure
 func surroundWithHTML(html []byte) []byte {
 	out := fmt.Sprintf(`<!DOCTYPE html>
 <html>
@@ -59,6 +61,7 @@ func surroundWithHTML(html []byte) []byte {
 			}
 
 			section.slide {
+				position: relative;
 				min-height: 100vh;
 				display: flex;
 				flex-direction: column;
@@ -67,6 +70,15 @@ func surroundWithHTML(html []byte) []byte {
 
 			section.slide > div.padding {
 				margin: 2em;
+			}
+
+			section.slide > div.pager {
+				position: absolute;
+				top: 0;
+				right: 0;
+				margin: 1em;
+				color: rgba(0,0,0,0.4);
+				font-size: 85%%;
 			}
 			
 			/* base style */
@@ -199,9 +211,25 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 	return []byte(out)
 }
 
+// Converts horizontal rulers to slides
 func compileSlides(html []byte) []byte {
 	out := string(html)
 	out = strings.Replace(out, "<hr />", "</div>\n</section>\n<section class='slide'>\n<div class='padding'>", -1)
+	return []byte(out)
+}
+
+var openSlideRegex = regexp.MustCompile("<section class='slide'>")
+
+// Puts numbered ids to each slide and appends the pager div
+func numberSlides(html []byte) []byte {
+	out := string(html)
+	// Find all slides tags
+	slides := openSlideRegex.FindAll(html, -1)
+	for i, slide := range slides {
+		s := string(slide)
+		pager := fmt.Sprintf("<div class='pager'><span class='current'>%v</span><span class='separator'>/</span><span class='total'>%v</span></div>", i+1, len(slides))
+		out = strings.Replace(out, s, fmt.Sprintf("%v id=\"%v\">\n%v", s[0:len(s)-1], i+1, pager), 1)
+	}
 	return []byte(out)
 }
 
@@ -209,6 +237,7 @@ var imgRegex = regexp.MustCompile("<img.+/>")
 var imgAltRegex = regexp.MustCompile("alt=\"(.+)\"")
 var isDigitRegex = regexp.MustCompile("\\d")
 
+// Sizes images based on their alt attributes
 func sizeImages(html []byte) []byte {
 	out := string(html)
 	// Find all image tags
