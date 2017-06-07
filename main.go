@@ -13,11 +13,13 @@ import (
 
 var (
 	title string
+	style string
 )
 
 func main() {
 	// Flags
-	flag.StringVar(&title, "title", "present8", "title for the presentation")
+	flag.StringVar(&title, "title", "Presentation", "title for the presentation")
+	flag.StringVar(&style, "style", "", "additional style for presentation")
 	flag.Parse()
 
 	// Read Input
@@ -44,199 +46,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-}
-
-// Wraps all slides into the HTML base structure
-func surroundWithHTML(html []byte) []byte {
-	out := fmt.Sprintf(`<!DOCTYPE html>
-<html>
-  <head>
-    <title>%v</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<style>
-			/* minimal style */
-			body, h1, h2, h3, h4, h5, p {
-				margin: 0;
-				padding: 0;
-			}
-
-			body {
-				background-color: #f6f8fa;
-			}
-
-			section.slide {
-				position: relative;
-				min-height: 100vh;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				background-color: white;
-				margin-bottom: 20px;
-			}
-
-			section.slide > div.padding {
-				margin: 2em;
-			}
-
-			section.slide > div.pager {
-				position: absolute;
-				top: 0;
-				right: 0;
-				margin: 1em;
-				color: rgba(0,0,0,0.4);
-				font-size: 85%%;
-			}
-
-			section.slide div.row {
-				display: flex;
-			}
-			
-			section.slide div.column {
-				width: 100%%;
-			}
-			
-			/* base style */
-			body {
-				font-family: sans-serif;
-				font-size: 1.5em;
-				line-height: 1.5;
-			}
-
-			h1, h2, table {
-				margin-bottom: 1em;
-			}
-			
-			h3, h4, h5, p {
-				margin-bottom: 0.5em;
-			}
-
-			table {
-				width: 100%%;
-				border-collapse: collapse;
-			}
-
-			table th {
-				text-align: left;
-				font-size: 85%%;
-			}
-
-			table td, table th {
-				padding: 0.4em 0.8em;
-			}
-
-			table tr:nth-child(even) {
-				background-color: #f6f8fa;
-			}
-
-			img.center {
-				display: block;
-				margin: 0 auto;
-			}
-
-			code {
-				padding: 0.4em;
-				padding-top: 0.2em;
-				padding-bottom: 0.2em;
-				margin: 0;
-				font-size: 85%%;
-				background-color: rgba(27,31,35,0.05);
-				border-radius: 3px;	
-			}
-
-			pre {
-				padding: 16px;
-				overflow: auto;
-				font-size: 85%%;
-				line-height: 1.45;
-				background-color: #f6f8fa;
-				border-radius: 3px;
-			}
-
-			pre > code {
-				background: none;
-			}
-		</style>
-		<script>
-var p8 = {};
-p8.allSlides = function() {
-  return document.querySelectorAll("section.slide");
-}
-
-p8.currentSlide = function() {
-  var slides = p8.allSlides();
-  return slides[p8.currentSlideIndex()];
-}
-
-p8.currentSlideIndex = function() {
-  var slides = p8.allSlides();
-  for(var i = slides.length-1; i >= 0; i--) {
-    if((window.pageYOffset +1) >= slides[i].offsetTop){
-      return i;
-    }
-  };
-  return 0;
-}
-
-p8.nextSlideIndex = function() {
-  var slides = p8.allSlides();
-  var current = p8.currentSlideIndex();
-  var next = current + 1;
-  if(next >= slides.length) {
-    return current;
-  }
-  return next;
-}
-
-p8.previousSlideIndex = function() {
-  var slides = p8.allSlides();
-  var current = p8.currentSlideIndex();
-  var prev = current - 1;
-  if(prev < 0) {
-    return 0;
-  }
-  return prev;
-}
-
-p8.scrollToSlide = function(index) {
-  var slides = p8.allSlides();
-  var slide = slides[index];
-  window.scrollTo(0, slide.offsetTop);
-}
-
-p8.nextSlide = function() {
-  p8.scrollToSlide(p8.nextSlideIndex());
-}
-
-p8.previousSlide = function() {
-  p8.scrollToSlide(p8.previousSlideIndex());
-}
-
-p8.registerKeyNavigation = function() {
-  document.onkeydown = function(e){
-    e.preventDefault();
-    // right, down and space
-    if(e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 32) {
-      p8.nextSlide();
-    }
-    // left and up
-    if(e.keyCode == 37 || e.keyCode == 38) {
-      p8.previousSlide();
-    }
-  }
-}
-document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
-		</script>
-  </head>
-  <body>
-		<section class='slide'>
-			<div class='padding'>
-	`, title)
-	out += string(html)
-	out += `</div>
-		</section>
-	</body>
-</html>`
-	return []byte(out)
 }
 
 // Converts horizontal rulers to slides
@@ -297,5 +106,27 @@ func sizeImages(html []byte) []byte {
 		newImg := fmt.Sprintf("%v style=\"%v\" class=\"%v\">", img[0:len(img)-3], style, class)
 		out = strings.Replace(out, img, newImg, 1)
 	}
+	return []byte(out)
+}
+
+// Wraps all slides into the HTML base structure
+func surroundWithHTML(html []byte) []byte {
+	out := fmt.Sprintf(`<!DOCTYPE html>
+<html>
+  <head>
+    <title>%v</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>%v</style>
+		<script>%v</script>
+  </head>
+  <body>
+		<section class='slide'>
+			<div class='padding'>
+	`, title, css, js)
+	out += string(html)
+	out += `</div>
+		</section>
+	</body>
+</html>`
 	return []byte(out)
 }
