@@ -32,13 +32,22 @@ func main() {
 		panic(err)
 	}
 
+	// Load additional css style provided
+	var additionalCSS []byte
+	if style != "" {
+		additionalCSS, err = ioutil.ReadFile(style)
+		if err != nil {
+			panic(err)
+		}
+	}
+
 	// Compile HTML
 	output := blackfriday.MarkdownCommon(markdown)
 
 	// Processing Pipeline
 	output = compileSlides(output)
 	output = sizeImages(output)
-	output = surroundWithHTML(output)
+	output = surroundWithHTML(output, title, additionalCSS)
 	output = numberSlides(output)
 
 	// Write HTML
@@ -110,19 +119,20 @@ func sizeImages(html []byte) []byte {
 }
 
 // Wraps all slides into the HTML base structure
-func surroundWithHTML(html []byte) []byte {
+func surroundWithHTML(html []byte, presentationTitle string, additionalCSS []byte) []byte {
 	out := fmt.Sprintf(`<!DOCTYPE html>
 <html>
   <head>
     <title>%v</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<style>%v</style>
+		<style>%v</style>
 		<script>%v</script>
   </head>
   <body>
 		<section class='slide'>
 			<div class='padding'>
-	`, title, css, js)
+	`, presentationTitle, css, string(additionalCSS), js)
 	out += string(html)
 	out += `</div>
 		</section>
