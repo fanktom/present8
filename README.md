@@ -2,6 +2,7 @@
 
 A markdown to HTML compiler for simple, standalone, navigatable HTML presentations.
 
+See a [Demo](README.md.html) of this `README.md` compiled with the minimal style.
 
 ---
 
