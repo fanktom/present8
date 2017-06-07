@@ -25,8 +25,8 @@ See a [Demo](http://fanktom.github.io/present8) of this `README.md` compiled wit
 
 Download one of the prebuild binaries for your operating system:
 
-* [Linux/macOS](bin/present8)
-* [Windows](bin/present8.exe)
+* [Linux/macOS](https://fanktom.github.io/present8/bin/present8)
+* [Windows](https://fanktom.github.io/present8/bin/present8.exe)
 
 Or compile and install it yourself with `go get`:
 ```
@@ -68,7 +68,7 @@ Further you can navigate just by scrolling around.
 The presentation will pick up the current slide position, so the arrow keys will always work.
 
 ### JS
-Have a look at [js.go](js.go) to inspect the available navigation methods on the `p8` object.
+Have a look at [js.go](https://github.com/fanktom/present8/blob/master/js.go) to inspect the available navigation methods on the `p8` object.
 
 It provides methods to programmaticallty change slides, fetch the current index, etc.
 
@@ -76,7 +76,7 @@ It provides methods to programmaticallty change slides, fetch the current index,
 
 ## Custom Style
 
-To write and include your own style have a look at the classes in [css.go](css.go).
+To write and include your own style have a look at the classes in [css.go](https://github.com/fanktom/present8/blob/master/css.go).
 
 Then write your own stylesheet.
 
