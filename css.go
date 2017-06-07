@@ -59,13 +59,13 @@ h3, h4, h5, p {
 }
 
 table {
-	width: 100%%;
+	width: 100%;
 	border-collapse: collapse;
 }
 
 table th {
 	text-align: left;
-	font-size: 85%%;
+	font-size: 85%;
 }
 
 table td, table th {
@@ -86,7 +86,7 @@ code {
 	padding-top: 0.2em;
 	padding-bottom: 0.2em;
 	margin: 0;
-	font-size: 85%%;
+	font-size: 85%;
 	background-color: rgba(27,31,35,0.05);
 	border-radius: 3px;	
 }
@@ -94,7 +94,7 @@ code {
 pre {
 	padding: 16px;
 	overflow: auto;
-	font-size: 85%%;
+	font-size: 85%;
 	line-height: 1.45;
 	background-color: #f6f8fa;
 	border-radius: 3px;
