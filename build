@@ -7,4 +7,4 @@ go build -o bin/present8
 GOOS=windows GOARCH=386 go build -o bin/present8.exe
 
 # Readme
-./bin/present8 README.md
+./bin/present8 --output index.html README.md
