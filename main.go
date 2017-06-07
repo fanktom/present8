@@ -34,7 +34,7 @@ func main() {
 		panic(err)
 	}
 
-	// Load additional css style provided
+	// Load additional css style provided (they are compiled into the HTML file to make it a nice standalone package)
 	var additionalCSS []byte
 	if style != "" {
 		additionalCSS, err = ioutil.ReadFile(style)
@@ -64,6 +64,10 @@ func main() {
 }
 
 // Converts horizontal rulers to slides
+//     ---
+//     This is a slide
+//     ---
+//     And another
 func compileSlides(html []byte) []byte {
 	out := string(html)
 	out = strings.Replace(out, "<hr />", "</div>\n</section>\n<section class='slide'>\n<div class='padding'>", -1)
@@ -90,6 +94,13 @@ var imgAltRegex = regexp.MustCompile("alt=\"(.+)\"")
 var isDigitRegex = regexp.MustCompile("\\d")
 
 // Sizes images based on their alt attributes
+// Currently supported values are:
+//    ![100%](image.png)				// width of 100% of the slide
+//    ![50%](image.png)					// width of 50% of the slide
+//    ![center](image.png)			// centered in slide (class="center")
+//    ![center 50%](image.png)	// width is 50% and centered in slide
+//    ![anything](image.png)		// customizable by additional style sheet (class="anything")
+// In general alt values that do not contain a number are appended as class names to te image
 func sizeImages(html []byte) []byte {
 	out := string(html)
 	// Find all image tags
@@ -124,7 +135,7 @@ func sizeImages(html []byte) []byte {
 	return []byte(out)
 }
 
-// Wraps all slides into the HTML base structure
+// Wraps all slides into a HTML base structure
 func surroundWithHTML(html []byte, presentationTitle string, additionalCSS []byte) []byte {
 	out := fmt.Sprintf(`<!DOCTYPE html>
 <html>
