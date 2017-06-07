@@ -102,16 +102,30 @@ func surroundWithHTML(html []byte) []byte {
 				line-height: 1.5;
 			}
 
-			h1, h2, h3, table {
+			h1, h2, table {
 				margin-bottom: 1em;
 			}
 			
-			h4, h5, p {
+			h3, h4, h5, p {
 				margin-bottom: 0.5em;
 			}
 
 			table {
 				width: 100%%;
+				border-collapse: collapse;
+			}
+
+			table th {
+				text-align: left;
+				font-size: 85%%;
+			}
+
+			table td, table th {
+				padding: 0.4em 0.8em;
+			}
+
+			table tr:nth-child(even) {
+				background-color: #f6f8fa;
 			}
 
 			img.center {
