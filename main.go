@@ -63,14 +63,15 @@ func main() {
 	}
 }
 
-// Converts horizontal rulers to slides
-//     ---
+// Converts slide comments to slide divs
+//     <!-- slide -->
 //     This is a slide
-//     ---
+//
+//     <!-- slide -->
 //     And another
 func compileSlides(html []byte) []byte {
 	out := string(html)
-	out = strings.Replace(out, "<hr />", "</div>\n</section>\n<section class='slide'>\n<div class='padding'>", -1)
+	out = strings.Replace(out, "<!-- slide -->", "</div>\n</section>\n<section class='slide'>\n<div class='padding'>", -1)
 	return []byte(out)
 }
 

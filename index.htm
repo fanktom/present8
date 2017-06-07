@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 <h2>Features</h2>
 
 <ul>
-<li>Comments in the markdown, e.g. <code>&lt;!-- slide --&gt;</code> are used as slide separators</li>
+<li>Horizontal rulers <code>---</code> in markdown are used as slide seperators</li>
 <li>Compiled HTML is a single file that contains everything</li>
 <li>Navigation with arrow keys automatically scrolls to the next/previous slide</li>
 <li>Slides can be longer than a screen because they are scrollable, e.g. long source code</li>
@@ -206,6 +206,7 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 <li>Provided styling is minimal. An additional css file can be compiled into the presentation for looks.</li>
 <li>Enables a workflow to autobuild commited markdown changes into a presentation website (Github/Gitlab Pages)</li>
 <li>Tool itself is written in Go, you can send your colleagues a simple binary executable.</li>
+<li>Syntax is largely compatible with <a href="https://yhatt.github.io/marp/">Marp</a>, but the ouput is a website</li>
 </ul>
 
 </div>
@@ -310,11 +311,11 @@ The presentation will pick up the current slide position, so the arrow keys will
 <div class='pager'><span class='current'>7</span><span class='separator'>/</span><span class='total'>10</span></div>
 <div class='padding'>
 
-<h2>Markdown Comments</h2>
+<h2>Markdown</h2>
 
 <p>The best example markdown is this <code>README.md</code>.</p>
 
-<p>Basically just write normal Markdown and separate slides with a <code>&lt;!-- slide --&gt;</code> comment.</p>
+<p>Basically just write normal Markdown and separate slides with a <code>&lt;!-- slide --&gt;</code>.</p>
 
 </div>
 </section>
