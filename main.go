@@ -12,14 +12,16 @@ import (
 )
 
 var (
-	title string
-	style string
+	title   string
+	style   string
+	outname string
 )
 
 func main() {
 	// Flags
 	flag.StringVar(&title, "title", "Presentation", "title for the presentation")
 	flag.StringVar(&style, "style", "", "additional style for presentation")
+	flag.StringVar(&outname, "output", "{input}.md.html", "name for output HTML")
 	flag.Parse()
 
 	// Read Input
@@ -51,7 +53,11 @@ func main() {
 	output = numberSlides(output)
 
 	// Write HTML
-	err = ioutil.WriteFile(input+".html", output, 0644)
+	filename := input + ".html"
+	if outname != "{input}.md.html" {
+		filename = outname
+	}
+	err = ioutil.WriteFile(filename, output, 0644)
 	if err != nil {
 		panic(err)
 	}
