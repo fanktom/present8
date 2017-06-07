@@ -60,12 +60,18 @@ func surroundWithHTML(html []byte) []byte {
 				padding: 0;
 			}
 
+			body {
+				background-color: #f6f8fa;
+			}
+
 			section.slide {
 				position: relative;
 				min-height: 100vh;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
+				background-color: white;
+				margin-bottom: 20px;
 			}
 
 			section.slide > div.padding {
@@ -79,6 +85,14 @@ func surroundWithHTML(html []byte) []byte {
 				margin: 1em;
 				color: rgba(0,0,0,0.4);
 				font-size: 85%%;
+			}
+
+			section.slide div.row {
+				display: flex;
+			}
+			
+			section.slide div.column {
+				width: 100%%;
 			}
 			
 			/* base style */
@@ -100,7 +114,7 @@ func surroundWithHTML(html []byte) []byte {
 				width: 100%%;
 			}
 
-			p img.center {
+			img.center {
 				display: block;
 				margin: 0 auto;
 			}
