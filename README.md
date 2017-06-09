@@ -14,18 +14,17 @@ See a [Demo](http://fanktom.github.io/present8) of this `README.md` compiled wit
 * Slides can be longer than a screen because they are scrollable, e.g. long source code
 * Links, Videos, Images, etc. can be embedded as with any normal document
 * The markdown document itself is the script of the presentation (as is this README.md)
-* Provided styling is minimal. An additional css file can be compiled into the presentation for looks.
+* Provided styling is minimal. An additional css file can be compiled into the presentation for looks
 * Enables a workflow to autobuild commited markdown changes into a presentation website (Github/Gitlab Pages)
-* Tool itself is written in Go, you can send your colleagues a simple binary executable.
+* Tool itself is written in Go, you can send your colleagues a simple binary executable
 
 <!-- slide -->
 
 ## Installation
 
-Download one of the prebuild binaries for your operating system:
+Download one of the prebuild binaries for your operating system (currently we're building for `linux-64`, `darwin-64` and `windows-64`) from the official releases page:
 
-* [Linux/macOS](https://fanktom.github.io/present8/bin/present8)
-* [Windows](https://fanktom.github.io/present8/bin/present8.exe)
+* [https://github.com/fanktom/present8/releases](https://github.com/fanktom/present8/releases)
 
 Or compile and install it yourself with `go get`:
 ```
@@ -45,13 +44,14 @@ This will create a `README.md.html`.
 
 Further command line options are:
 ```
-Usage of present8:
+Usage of ./bin/present8-linux-64:
   -output string
     	name for output HTML (default "{input}.md.html")
   -style string
     	additional style for presentation
   -title string
     	title for the presentation (default "Presentation")
+  -v	print version
 ```
 
 <!-- slide -->
@@ -101,6 +101,133 @@ This will include the style definitions into the HTML to make a nice standalone 
 The best example markdown is this `README.md`.
 
 Basically just write normal Markdown and separate slides with a `<!-- slide -->` comment.
+
+<!-- slide -->
+
+## Multi-Column Layout
+
+You can create multi-column layouts by annotating content with `<!-- row -->` and `<!-- column -->` comments.
+
+<!-- row -->
+<!-- column -->
+### Column 1
+
+Hello World
+
+![20%](assets/logo.png)
+
+<!-- column:end -->
+<!-- column -->
+### Column 2
+
+Hello World
+
+![20%](assets/logo.png)
+
+<!-- column:end -->
+<!-- column -->
+### Column 3
+
+Hello World
+
+![20%](assets/logo.png)
+
+<!-- column:end -->
+<!-- row:end -->
+
+This is done with the following syntax:
+
+```
+<!-- row -->
+<!-- column -->
+### Column 1
+
+Hello World
+
+![20%](assets/logo.png)
+
+<!-- column:end -->
+<!-- column -->
+### Column 2
+
+Hello World
+
+![20%](assets/logo.png)
+
+<!-- column:end -->
+<!-- column -->
+### Column 3
+
+Hello World
+
+![20%](assets/logo.png)
+
+<!-- column:end -->
+<!-- row:end -->
+```
+
+### Multiple Rows
+Manually ending the rows `<!-- row:end -->` and columns `<!-- column:end -->` allows more flexible setups, for example multiple rows on a single slide:
+
+<!-- row -->
+<!-- column -->
+### foo.go
+
+```
+package foo
+
+func SayHello() string {
+  return "Hello"
+}
+```
+
+<!-- column:end -->
+<!-- column -->
+### foo\_test.go
+
+```
+package foo
+
+func TestSayHello(t *testing.T) {
+  if SayHello() != "Hello" {
+    t.Error("Did not say Hello!")
+  }
+}
+```
+
+<!-- column:end -->
+<!-- row:end -->
+
+### Nested Columns
+
+Further you can go crazy and nest rows and columns:
+
+<!-- row -->
+<!-- column -->
+
+Left Column
+
+<!-- column:end -->
+<!-- column -->
+
+Right Column
+
+<!-- row -->
+<!-- column -->
+
+Left Column
+
+<!-- column:end -->
+<!-- column -->
+
+Right Column
+
+<!-- column:end -->
+<!-- row:end -->
+
+<!-- column:end -->
+<!-- row:end -->
+
 
 <!-- slide -->
 

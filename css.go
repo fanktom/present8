@@ -32,15 +32,21 @@ section.slide > div.pager {
 	right: 0;
 	margin: 1em;
 	color: rgba(0,0,0,0.4);
-	font-size: 85%%;
+	font-size: 85%;
 }
 
 section.slide div.row {
 	display: flex;
+	justify-content: space-between;
 }
 
 section.slide div.column {
-	width: 100%%;
+	width: 100%;
+	padding-right: 1em;
+}
+
+section.slide div.column:last-child {
+	padding-right: 0;
 }
 
 /* base style */
@@ -50,7 +56,7 @@ body {
 	line-height: 1.5;
 }
 
-h1, h2, table {
+h1, h2, table, div.row, pre {
 	margin-bottom: 1em;
 }
 

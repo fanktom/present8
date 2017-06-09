@@ -15,6 +15,7 @@ var (
 	title   string
 	style   string
 	outname string
+	version = "1.0"
 )
 
 func main() {
@@ -22,7 +23,14 @@ func main() {
 	flag.StringVar(&title, "title", "Presentation", "title for the presentation")
 	flag.StringVar(&style, "style", "", "additional style for presentation")
 	flag.StringVar(&outname, "output", "{input}.md.html", "name for output HTML")
+	var printVersion = flag.Bool("v", false, "print version")
 	flag.Parse()
+
+	// Version check only?
+	if *printVersion {
+		fmt.Println(version)
+		os.Exit(0)
+	}
 
 	// Read Input
 	if len(os.Args) < 2 {
@@ -48,6 +56,7 @@ func main() {
 
 	// Processing Pipeline
 	output = compileSlides(output)
+	output = compileRowsAndColumns(output)
 	output = sizeImages(output)
 	output = surroundWithHTML(output, title, additionalCSS)
 	output = numberSlides(output)
@@ -72,6 +81,21 @@ func main() {
 func compileSlides(html []byte) []byte {
 	out := string(html)
 	out = strings.Replace(out, "<!-- slide -->", "</div>\n</section>\n<section class='slide'>\n<div class='padding'>", -1)
+	return []byte(out)
+}
+
+// Converts row and column comments to divs
+//     <!-- slide -->
+//     This is a slide
+//
+//     <!-- slide -->
+//     And another
+func compileRowsAndColumns(html []byte) []byte {
+	out := string(html)
+	out = strings.Replace(out, "<!-- row -->", "<div class='row'>\n", -1)
+	out = strings.Replace(out, "<!-- row:end -->", "</div>\n", -1)
+	out = strings.Replace(out, "<!-- column -->", "<div class='column'>\n", -1)
+	out = strings.Replace(out, "<!-- column:end -->", "</div>\n", -1)
 	return []byte(out)
 }
 

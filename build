@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Linux/macOS
-go build -o bin/present8
+# Linux
+GOOS=linux GOARCH=amd64 go build -o bin/present8-linux-64
+
+# macOS
+GOOS=darwin GOARCH=amd64 go build -o bin/present8-darwin-64
 
 # Windows
-GOOS=windows GOARCH=386 go build -o bin/present8.exe
+GOOS=windows GOARCH=amd64 go build -o bin/present8-windows-64.exe
 
 # Readme
-./bin/present8 --output index.html README.md
+./bin/present8-linux-64 --output index.html README.md

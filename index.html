@@ -34,15 +34,21 @@ section.slide > div.pager {
 	right: 0;
 	margin: 1em;
 	color: rgba(0,0,0,0.4);
-	font-size: 85%%;
+	font-size: 85%;
 }
 
 section.slide div.row {
 	display: flex;
+	justify-content: space-between;
 }
 
 section.slide div.column {
-	width: 100%%;
+	width: 100%;
+	padding-right: 1em;
+}
+
+section.slide div.column:last-child {
+	padding-right: 0;
 }
 
 /* base style */
@@ -52,7 +58,7 @@ body {
 	line-height: 1.5;
 }
 
-h1, h2, table {
+h1, h2, table, div.row, pre {
 	margin-bottom: 1em;
 }
 
@@ -180,7 +186,7 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
   </head>
   <body>
 		<section class='slide' id="1">
-<div class='pager'><span class='current'>1</span><span class='separator'>/</span><span class='total'>10</span></div>
+<div class='pager'><span class='current'>1</span><span class='separator'>/</span><span class='total'>11</span></div>
 			<div class='padding'>
 	<p><img src="assets/logo.png" alt="300px" style="width: 300px;" class=""></p>
 
@@ -191,7 +197,7 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 </div>
 </section>
 <section class='slide' id="2">
-<div class='pager'><span class='current'>2</span><span class='separator'>/</span><span class='total'>10</span></div>
+<div class='pager'><span class='current'>2</span><span class='separator'>/</span><span class='total'>11</span></div>
 <div class='padding'>
 
 <h2>Features</h2>
@@ -203,24 +209,23 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 <li>Slides can be longer than a screen because they are scrollable, e.g. long source code</li>
 <li>Links, Videos, Images, etc. can be embedded as with any normal document</li>
 <li>The markdown document itself is the script of the presentation (as is this README.md)</li>
-<li>Provided styling is minimal. An additional css file can be compiled into the presentation for looks.</li>
+<li>Provided styling is minimal. An additional css file can be compiled into the presentation for looks</li>
 <li>Enables a workflow to autobuild commited markdown changes into a presentation website (Github/Gitlab Pages)</li>
-<li>Tool itself is written in Go, you can send your colleagues a simple binary executable.</li>
+<li>Tool itself is written in Go, you can send your colleagues a simple binary executable</li>
 </ul>
 
 </div>
 </section>
 <section class='slide' id="3">
-<div class='pager'><span class='current'>3</span><span class='separator'>/</span><span class='total'>10</span></div>
+<div class='pager'><span class='current'>3</span><span class='separator'>/</span><span class='total'>11</span></div>
 <div class='padding'>
 
 <h2>Installation</h2>
 
-<p>Download one of the prebuild binaries for your operating system:</p>
+<p>Download one of the prebuild binaries for your operating system (currently we&rsquo;re building for <code>linux-64</code>, <code>darwin-64</code> and <code>windows-64</code>) from the official releases page:</p>
 
 <ul>
-<li><a href="https://fanktom.github.io/present8/bin/present8">Linux/macOS</a></li>
-<li><a href="https://fanktom.github.io/present8/bin/present8.exe">Windows</a></li>
+<li><a href="https://github.com/fanktom/present8/releases">https://github.com/fanktom/present8/releases</a></li>
 </ul>
 
 <p>Or compile and install it yourself with <code>go get</code>:</p>
@@ -231,7 +236,7 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 </div>
 </section>
 <section class='slide' id="4">
-<div class='pager'><span class='current'>4</span><span class='separator'>/</span><span class='total'>10</span></div>
+<div class='pager'><span class='current'>4</span><span class='separator'>/</span><span class='total'>11</span></div>
 <div class='padding'>
 
 <h2>Usage</h2>
@@ -245,19 +250,20 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 
 <p>Further command line options are:</p>
 
-<pre><code>Usage of present8:
+<pre><code>Usage of ./bin/present8-linux-64:
   -output string
     	name for output HTML (default &quot;{input}.md.html&quot;)
   -style string
     	additional style for presentation
   -title string
     	title for the presentation (default &quot;Presentation&quot;)
+  -v	print version
 </code></pre>
 
 </div>
 </section>
 <section class='slide' id="5">
-<div class='pager'><span class='current'>5</span><span class='separator'>/</span><span class='total'>10</span></div>
+<div class='pager'><span class='current'>5</span><span class='separator'>/</span><span class='total'>11</span></div>
 <div class='padding'>
 
 <h2>Navigation</h2>
@@ -281,7 +287,7 @@ The presentation will pick up the current slide position, so the arrow keys will
 </div>
 </section>
 <section class='slide' id="6">
-<div class='pager'><span class='current'>6</span><span class='separator'>/</span><span class='total'>10</span></div>
+<div class='pager'><span class='current'>6</span><span class='separator'>/</span><span class='total'>11</span></div>
 <div class='padding'>
 
 <h2>Custom Style</h2>
@@ -307,7 +313,7 @@ The presentation will pick up the current slide position, so the arrow keys will
 </div>
 </section>
 <section class='slide' id="7">
-<div class='pager'><span class='current'>7</span><span class='separator'>/</span><span class='total'>10</span></div>
+<div class='pager'><span class='current'>7</span><span class='separator'>/</span><span class='total'>11</span></div>
 <div class='padding'>
 
 <h2>Markdown Comments</h2>
@@ -319,7 +325,179 @@ The presentation will pick up the current slide position, so the arrow keys will
 </div>
 </section>
 <section class='slide' id="8">
-<div class='pager'><span class='current'>8</span><span class='separator'>/</span><span class='total'>10</span></div>
+<div class='pager'><span class='current'>8</span><span class='separator'>/</span><span class='total'>11</span></div>
+<div class='padding'>
+
+<h2>Multi-Column Layout</h2>
+
+<p>You can create multi-column layouts by annotating content with <code>&lt;!-- row --&gt;</code> and <code>&lt;!-- column --&gt;</code> comments.</p>
+
+<div class='row'>
+
+
+<div class='column'>
+
+
+<h3>Column 1</h3>
+
+<p>Hello World</p>
+
+<p><img src="assets/logo.png" alt="20%" style="width: 20%;" class=""></p>
+
+</div>
+
+
+<div class='column'>
+
+
+<h3>Column 2</h3>
+
+<p>Hello World</p>
+
+<p><img src="assets/logo.png" alt="20%" style="width: 20%;" class=""></p>
+
+</div>
+
+
+<div class='column'>
+
+
+<h3>Column 3</h3>
+
+<p>Hello World</p>
+
+<p><img src="assets/logo.png" alt="20%" style="width: 20%;" class=""></p>
+
+</div>
+
+
+</div>
+
+
+<p>This is done with the following syntax:</p>
+
+<pre><code>&lt;!-- row --&gt;
+&lt;!-- column --&gt;
+### Column 1
+
+Hello World
+
+![20%](assets/logo.png)
+
+&lt;!-- column:end --&gt;
+&lt;!-- column --&gt;
+### Column 2
+
+Hello World
+
+![20%](assets/logo.png)
+
+&lt;!-- column:end --&gt;
+&lt;!-- column --&gt;
+### Column 3
+
+Hello World
+
+![20%](assets/logo.png)
+
+&lt;!-- column:end --&gt;
+&lt;!-- row:end --&gt;
+</code></pre>
+
+<h3>Multiple Rows</h3>
+
+<p>Manually ending the rows <code>&lt;!-- row:end --&gt;</code> and columns <code>&lt;!-- column:end --&gt;</code> allows more flexible setups, for example multiple rows on a single slide:</p>
+
+<div class='row'>
+
+
+<div class='column'>
+
+
+<h3>foo.go</h3>
+
+<pre><code>package foo
+
+func SayHello() string {
+  return &quot;Hello&quot;
+}
+</code></pre>
+
+</div>
+
+
+<div class='column'>
+
+
+<h3>foo_test.go</h3>
+
+<pre><code>package foo
+
+func TestSayHello(t *testing.T) {
+  if SayHello() != &quot;Hello&quot; {
+    t.Error(&quot;Did not say Hello!&quot;)
+  }
+}
+</code></pre>
+
+</div>
+
+
+</div>
+
+
+<h3>Nested Columns</h3>
+
+<p>Further you can go crazy and nest rows and columns:</p>
+
+<div class='row'>
+
+
+<div class='column'>
+
+
+<p>Left Column</p>
+
+</div>
+
+
+<div class='column'>
+
+
+<p>Right Column</p>
+
+<div class='row'>
+
+
+<div class='column'>
+
+
+<p>Left Column</p>
+
+</div>
+
+
+<div class='column'>
+
+
+<p>Right Column</p>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+</section>
+<section class='slide' id="9">
+<div class='pager'><span class='current'>9</span><span class='separator'>/</span><span class='total'>11</span></div>
 <div class='padding'>
 
 <h2>Images</h2>
@@ -356,8 +534,8 @@ The presentation will pick up the current slide position, so the arrow keys will
 
 </div>
 </section>
-<section class='slide' id="9">
-<div class='pager'><span class='current'>9</span><span class='separator'>/</span><span class='total'>10</span></div>
+<section class='slide' id="10">
+<div class='pager'><span class='current'>10</span><span class='separator'>/</span><span class='total'>11</span></div>
 <div class='padding'>
 
 <h2>Tables</h2>
@@ -394,8 +572,8 @@ The presentation will pick up the current slide position, so the arrow keys will
 
 </div>
 </section>
-<section class='slide' id="10">
-<div class='pager'><span class='current'>10</span><span class='separator'>/</span><span class='total'>10</span></div>
+<section class='slide' id="11">
+<div class='pager'><span class='current'>11</span><span class='separator'>/</span><span class='total'>11</span></div>
 <div class='padding'>
 
 <h2>Code</h2>
