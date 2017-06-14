@@ -31,6 +31,11 @@ Or compile and install it yourself with `go get`:
 go get github.com/fanktom/present8
 ```
 
+Further, there is a prebuild Docker image at [system8/present8](https://hub.docker.com/r/system8/present8) you can use like this:
+```
+docker run -v $PWD:/data system8/present8 README.md
+```
+
 <!-- slide -->
 
 ## Usage

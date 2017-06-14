@@ -1,0 +1,17 @@
+#!/bin/bash
+
+TAG=$1
+if [ -z "$TAG" ]; then
+  echo "Missing version tag, e.g. ./build-image 1.2"
+  exit 1
+fi
+
+# Linux, without CGO
+CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o present8 . 
+
+# Docker image build
+docker build -t system8/present8:$TAG .
+docker tag system8/present8:$TAG system8/present8
+
+# Remove binary
+rm present8

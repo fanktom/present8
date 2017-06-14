@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TAG=$1
+if [ -z "$TAG" ]; then
+  echo "Missing version tag, e.g. ./build-image 1.2"
+  exit 1
+fi
+
+# Docker image build
+docker push system8/present8:$TAG
+docker push system8/present8
