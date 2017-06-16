@@ -24,6 +24,12 @@ section.slide {
 	margin-bottom: 20px;
 }
 
+@media print {
+	section.slide {
+		page-break-before: always;
+	}
+}
+
 section.slide > div.padding {
 	margin: 2em;
 }
@@ -35,6 +41,21 @@ section.slide > div.pager {
 	margin: 1em;
 	color: rgba(0,0,0,0.4);
 	font-size: 85%;
+}
+
+/* boxes can be used to put elements, such as logos into slides */
+section.slide > div.box1,
+section.slide > div.box2,
+section.slide > div.box3,
+section.slide > div.box4,
+section.slide > div.box5,
+section.slide > div.box6,
+section.slide > div.box7,
+section.slide > div.box8 {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 1em;
 }
 
 section.slide div.row {
@@ -187,6 +208,15 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
   <body>
 		<section class='slide' id="1">
 <div class='pager'><span class='current'>1</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 			<div class='padding'>
 	<p><img src="assets/logo.png" alt="300px" style="width: 300px;" class=""></p>
 
@@ -198,6 +228,15 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 </section>
 <section class='slide' id="2">
 <div class='pager'><span class='current'>2</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 <div class='padding'>
 
 <h2>Features</h2>
@@ -218,6 +257,15 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 </section>
 <section class='slide' id="3">
 <div class='pager'><span class='current'>3</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 <div class='padding'>
 
 <h2>Installation</h2>
@@ -242,6 +290,15 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 </section>
 <section class='slide' id="4">
 <div class='pager'><span class='current'>4</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 <div class='padding'>
 
 <h2>Usage</h2>
@@ -269,6 +326,15 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 </section>
 <section class='slide' id="5">
 <div class='pager'><span class='current'>5</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 <div class='padding'>
 
 <h2>Navigation</h2>
@@ -293,6 +359,15 @@ The presentation will pick up the current slide position, so the arrow keys will
 </section>
 <section class='slide' id="6">
 <div class='pager'><span class='current'>6</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 <div class='padding'>
 
 <h2>Custom Style</h2>
@@ -315,10 +390,45 @@ The presentation will pick up the current slide position, so the arrow keys will
 
 <p>This will include the style definitions into the HTML to make a nice standalone HTML presentation.</p>
 
+<h3>Box Overlays</h3>
+
+<p>By default, each slide contains 8 div boxes <code>section.slide &gt; div.box1 ... div.box8</code> with <code>position: absolute;</code> that can be used to add logos, or further information.</p>
+
+<p>For example, to add a logo to every top right corner of each slide:</p>
+
+<pre><code>section.slide &gt; div.box1 {
+  width: 100px;
+  height: 60px;
+  background-image: url(&quot;./assets/logo.png&quot;);
+  background-repeat: no-repeat;
+}
+</code></pre>
+
+<p>Or to add some text you can use a CSS <code>content</code> style:</p>
+
+<pre><code>section.slide &gt; div.box2 {
+  left: 0;
+  top: 0;
+}
+
+section.slide &gt; div.box2:before {
+  content: 'Hello World';
+}
+</code></pre>
+
 </div>
 </section>
 <section class='slide' id="7">
 <div class='pager'><span class='current'>7</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 <div class='padding'>
 
 <h2>Markdown Comments</h2>
@@ -331,6 +441,15 @@ The presentation will pick up the current slide position, so the arrow keys will
 </section>
 <section class='slide' id="8">
 <div class='pager'><span class='current'>8</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 <div class='padding'>
 
 <h2>Multi-Column Layout</h2>
@@ -503,6 +622,15 @@ func TestSayHello(t *testing.T) {
 </section>
 <section class='slide' id="9">
 <div class='pager'><span class='current'>9</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 <div class='padding'>
 
 <h2>Images</h2>
@@ -541,6 +669,15 @@ func TestSayHello(t *testing.T) {
 </section>
 <section class='slide' id="10">
 <div class='pager'><span class='current'>10</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 <div class='padding'>
 
 <h2>Tables</h2>
@@ -579,6 +716,15 @@ func TestSayHello(t *testing.T) {
 </section>
 <section class='slide' id="11">
 <div class='pager'><span class='current'>11</span><span class='separator'>/</span><span class='total'>11</span></div>
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		
 <div class='padding'>
 
 <h2>Code</h2>

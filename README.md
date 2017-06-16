@@ -99,6 +99,34 @@ And compile with:
 
 This will include the style definitions into the HTML to make a nice standalone HTML presentation.
 
+### Box Overlays
+
+By default, each slide contains 8 div boxes `section.slide > div.box1 ... div.box8` with `position: absolute;` that can be used to add logos, or further information.
+
+For example, to add a logo to every top right corner of each slide:
+
+```
+section.slide > div.box1 {
+  width: 100px;
+  height: 60px;
+  background-image: url("./assets/logo.png");
+  background-repeat: no-repeat;
+}
+```
+
+Or to add some text you can use a CSS `content` style:
+
+```
+section.slide > div.box2 {
+  left: 0;
+  top: 0;
+}
+
+section.slide > div.box2:before {
+  content: 'Hello World';
+}
+```
+
 <!-- slide -->
 
 ## Markdown Comments

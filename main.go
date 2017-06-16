@@ -15,7 +15,7 @@ var (
 	title   string
 	style   string
 	outname string
-	version = "1.0"
+	version = "1.1"
 )
 
 func main() {
@@ -109,7 +109,17 @@ func numberSlides(html []byte) []byte {
 	for i, slide := range slides {
 		s := string(slide)
 		pager := fmt.Sprintf("<div class='pager'><span class='current'>%v</span><span class='separator'>/</span><span class='total'>%v</span></div>", i+1, len(slides))
-		out = strings.Replace(out, s, fmt.Sprintf("%v id=\"%v\">\n%v", s[0:len(s)-1], i+1, pager), 1)
+		boxes := `
+			<div class="box1"></div>
+			<div class="box2"></div>
+			<div class="box3"></div>
+			<div class="box4"></div>
+			<div class="box5"></div>
+			<div class="box6"></div>
+			<div class="box7"></div>
+			<div class="box8"></div>
+		`
+		out = strings.Replace(out, s, fmt.Sprintf("%v id=\"%v\">\n%v", s[0:len(s)-1], i+1, pager+boxes), 1)
 	}
 	return []byte(out)
 }

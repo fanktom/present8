@@ -22,6 +22,12 @@ section.slide {
 	margin-bottom: 20px;
 }
 
+@media print {
+	section.slide {
+		page-break-before: always;
+	}
+}
+
 section.slide > div.padding {
 	margin: 2em;
 }
@@ -33,6 +39,21 @@ section.slide > div.pager {
 	margin: 1em;
 	color: rgba(0,0,0,0.4);
 	font-size: 85%;
+}
+
+/* boxes can be used to put elements, such as logos into slides */
+section.slide > div.box1,
+section.slide > div.box2,
+section.slide > div.box3,
+section.slide > div.box4,
+section.slide > div.box5,
+section.slide > div.box6,
+section.slide > div.box7,
+section.slide > div.box8 {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 1em;
 }
 
 section.slide div.row {
