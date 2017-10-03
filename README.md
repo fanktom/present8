@@ -2,7 +2,7 @@
 
 A markdown to HTML compiler for simple, standalone, navigatable HTML presentations.
 
-See a [Demo](http://fanktom.github.io/present8) of this `README.md` compiled with the minimal style.
+See a [Demo](http://tommyfankhauser.github.io/present8) of this `README.md` compiled with the minimal style.
 
 <!-- slide -->
 
@@ -24,11 +24,11 @@ See a [Demo](http://fanktom.github.io/present8) of this `README.md` compiled wit
 
 Download one of the prebuild binaries for your operating system (currently we're building for `linux-64`, `darwin-64` and `windows-64`) from the official releases page:
 
-* [https://github.com/fanktom/present8/releases](https://github.com/fanktom/present8/releases)
+* [https://github.com/tommyfankhauser/present8/releases](https://github.com/tommyfankhauser/present8/releases)
 
 Or compile and install it yourself with `go get`:
 ```
-go get github.com/fanktom/present8
+go get github.com/tommyfankhauser/present8
 ```
 
 Further, there is a prebuild Docker image at [system8/present8](https://hub.docker.com/r/system8/present8) you can use like this:
@@ -72,7 +72,7 @@ Further you can navigate just by scrolling around.
 The presentation will pick up the current slide position, so the arrow keys will always work.
 
 ### JS
-Have a look at [js.go](https://github.com/fanktom/present8/blob/master/js.go) to inspect the available navigation methods on the `p8` object.
+Have a look at [js.go](https://github.com/tommyfankhauser/present8/blob/master/js.go) to inspect the available navigation methods on the `p8` object.
 
 It provides methods to programmaticallty change slides, fetch the current index, etc.
 
@@ -80,7 +80,7 @@ It provides methods to programmaticallty change slides, fetch the current index,
 
 ## Custom Style
 
-To write and include your own style have a look at the classes in [css.go](https://github.com/fanktom/present8/blob/master/css.go).
+To write and include your own style have a look at the classes in [css.go](https://github.com/tommyfankhauser/present8/blob/master/css.go).
 
 Then write your own stylesheet.
 
