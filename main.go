@@ -15,7 +15,7 @@ var (
 	title   string
 	style   string
 	outname string
-	version = "1.1"
+	version = "1.2"
 )
 
 func main() {

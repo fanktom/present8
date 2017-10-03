@@ -58,7 +58,6 @@ p8.previousSlide = function() {
 
 p8.registerKeyNavigation = function() {
   document.onkeydown = function(e){
-    e.preventDefault();
     // right, down and space
     if(e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 32) {
       p8.nextSlide();
@@ -67,6 +66,10 @@ p8.registerKeyNavigation = function() {
     if(e.keyCode == 37 || e.keyCode == 38) {
       p8.previousSlide();
     }
+		// space typically scrolls down an undefined distance
+		if(e.keyCode == 32) {
+			e.preventDefault();
+		}
   }
 }
 document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);

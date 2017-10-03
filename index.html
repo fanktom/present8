@@ -191,7 +191,6 @@ p8.previousSlide = function() {
 
 p8.registerKeyNavigation = function() {
   document.onkeydown = function(e){
-    e.preventDefault();
     // right, down and space
     if(e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 32) {
       p8.nextSlide();
@@ -200,6 +199,10 @@ p8.registerKeyNavigation = function() {
     if(e.keyCode == 37 || e.keyCode == 38) {
       p8.previousSlide();
     }
+		// space typically scrolls down an undefined distance
+		if(e.keyCode == 32) {
+			e.preventDefault();
+		}
   }
 }
 document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
@@ -222,7 +225,7 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 
 <p>A markdown to HTML compiler for simple, standalone, navigatable HTML presentations.</p>
 
-<p>See a <a href="http://fanktom.github.io/present8">Demo</a> of this <code>README.md</code> compiled with the minimal style.</p>
+<p>See a <a href="http://tommyfankhauser.github.io/present8">Demo</a> of this <code>README.md</code> compiled with the minimal style.</p>
 
 </div>
 </section>
@@ -273,12 +276,12 @@ document.addEventListener('DOMContentLoaded', p8.registerKeyNavigation, false);
 <p>Download one of the prebuild binaries for your operating system (currently we&rsquo;re building for <code>linux-64</code>, <code>darwin-64</code> and <code>windows-64</code>) from the official releases page:</p>
 
 <ul>
-<li><a href="https://github.com/fanktom/present8/releases">https://github.com/fanktom/present8/releases</a></li>
+<li><a href="https://github.com/tommyfankhauser/present8/releases">https://github.com/tommyfankhauser/present8/releases</a></li>
 </ul>
 
 <p>Or compile and install it yourself with <code>go get</code>:</p>
 
-<pre><code>go get github.com/fanktom/present8
+<pre><code>go get github.com/tommyfankhauser/present8
 </code></pre>
 
 <p>Further, there is a prebuild Docker image at <a href="https://hub.docker.com/r/system8/present8">system8/present8</a> you can use like this:</p>
@@ -351,7 +354,7 @@ The presentation will pick up the current slide position, so the arrow keys will
 
 <h3>JS</h3>
 
-<p>Have a look at <a href="https://github.com/fanktom/present8/blob/master/js.go">js.go</a> to inspect the available navigation methods on the <code>p8</code> object.</p>
+<p>Have a look at <a href="https://github.com/tommyfankhauser/present8/blob/master/js.go">js.go</a> to inspect the available navigation methods on the <code>p8</code> object.</p>
 
 <p>It provides methods to programmaticallty change slides, fetch the current index, etc.</p>
 
@@ -372,7 +375,7 @@ The presentation will pick up the current slide position, so the arrow keys will
 
 <h2>Custom Style</h2>
 
-<p>To write and include your own style have a look at the classes in <a href="https://github.com/fanktom/present8/blob/master/css.go">css.go</a>.</p>
+<p>To write and include your own style have a look at the classes in <a href="https://github.com/tommyfankhauser/present8/blob/master/css.go">css.go</a>.</p>
 
 <p>Then write your own stylesheet.</p>
 
