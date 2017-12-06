@@ -174,14 +174,15 @@ func sizeImages(html []byte) []byte {
 func surroundWithHTML(html []byte, presentationTitle string, additionalCSS []byte) []byte {
 	out := fmt.Sprintf(`<!DOCTYPE html>
 <html>
-  <head>
-    <title>%v</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>%v</title>
 		<style>%v</style>
 		<style>%v</style>
 		<script>%v</script>
-  </head>
-  <body>
+	</head>
+	<body>
 		<section class='slide'>
 			<div class='padding'>
 	`, presentationTitle, css, string(additionalCSS), js)
